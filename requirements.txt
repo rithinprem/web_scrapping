@@ -1,5 +1,5 @@
 Flask
-selenium
+selenium==3.141.0
 webdriver_manager
 beautifulsoup4
 schedule
