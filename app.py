@@ -1,25 +1,20 @@
 from flask import Flask
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
 from bs4 import BeautifulSoup
 import json
+import os
 
 app = Flask(__name__)
 
 def flipkart():
-    s = Service(ChromeDriverManager().install())
-    # driver.maximize_window()
-        
-    # Set up Chrome options for headless mode
-    chrome_options = Options()
-    chrome_options.add_argument('--headless')  # Run Chrome in headless mode
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER PATH"),chrome_options=chrome_options)
 
-    # # Initialize the WebDriver for Chrome with headless options
-    # driver = webdriver.Chrome(options=chrome_options)
-
-    driver = webdriver.Chrome(service=s,options=chrome_options) #added line
 
     search="watch"
     # Open the desired webpage
